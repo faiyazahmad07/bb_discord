@@ -27,7 +27,7 @@ def recv_message(url):
         #       print(message)
 
 def send(msg):
-        Discord(url="<discord webhook url>").post(content=msg)
+        Discord(url="<your discord webhook url>").post(content=msg)
 
 def read_dbs():
         db = []
@@ -79,6 +79,7 @@ def scanner(domain,isRepeated):
     subprocess.call('rm -r subfinder.txt amass.txt',shell=True)
     subprocess.call('cat sorted.txt | httpx -title -o http.txt',shell=True)
     subprocess.call('nuclei -l sorted.txt -o nuclei.txt',shell=True)
+    subprocess.call('naabu -l sorted.txt -o ports.txt',shell=True)
     os.chdir('..')
     if isRepeated:
         replace_dbs(domain,'re-scanned')
@@ -90,7 +91,10 @@ def scanner(domain,isRepeated):
 def main():
     again = False
     message = recv_message(url) #;print(message)
-    domain = message.split()[1]
+    try:
+        domain = message.split()[1]
+    except:
+        return None
     #print(domain)
     dbs = read_dbs()
     #print(dbs)
