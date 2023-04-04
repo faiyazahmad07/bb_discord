@@ -1,2 +1,2 @@
 # bb_discord
-A discord bot automate your reconnaissance process with Discord
+A discord bot automate your reconnaissance process
